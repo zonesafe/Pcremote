@@ -25,8 +25,8 @@ def load_pin():
 
 PIN = load_pin()
 
-VERSION = "v17"
-BUILD = 17
+VERSION = "v18"
+BUILD = 18
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPDATE_FILE = os.path.join(BASE_DIR, "update_url.txt")
 RESTART_FLAG = os.path.join(BASE_DIR, "restart.flag")
@@ -454,11 +454,14 @@ def valid_update_url(u):
     return u.startswith("https://") or u.startswith("http://127.0.0.1") or u.startswith("http://localhost")
 
 
+DEFAULT_UPDATE_URL = "https://raw.githubusercontent.com/zonesafe/Pcremote/main"
+
+
 def update_base():
     try:
         u = open(UPDATE_FILE, encoding="utf-8").read().strip().splitlines()[0].strip().rstrip("/")
     except Exception:
-        return None
+        u = DEFAULT_UPDATE_URL
     return u if valid_update_url(u) else None
 
 
